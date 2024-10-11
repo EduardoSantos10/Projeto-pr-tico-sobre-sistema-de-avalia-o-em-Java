@@ -1,15 +1,64 @@
 
+import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Projeto {
     public static void main(String[] args) { // Método main vai executar o programa
+        // imprimirSelecionados();
+        String[] candidatos = { "EDUARDO", "MARTINEZ", "RYAN", "MATHEUS", "FELIX" };
+        for (String candidato : candidatos) {
+            entrandoEmContato(candidato);
+        }
+    }
 
+    static void entrandoEmContato(String candidato) {
+        int tentativasRealizadas = 1;
+        boolean continuarTentando = true;
+        boolean atendeu = false;
+        do { // DO e WHILE, executa uma vez e verifica se as VAR (condicionais), verificar se
+             // o programa sofreu alteração, para poder encerrar o programa.
+             // elas precisarão sofrer alterações
+            atendeu = atender();
+            continuarTentando = !atendeu;
+            if (continuarTentando)
+                tentativasRealizadas++;
+            else
+                System.out.println("Contato Realizado com sucesso");
+        } while (continuarTentando && tentativasRealizadas < 3);
+
+        if (atendeu)
+            System.out.println("Conseguimos contato com " + candidato + " na " + tentativasRealizadas);
+        else
+            System.out.println(
+                    "Não conseguimos contato com " + candidato + ", número máximo tentativas " + tentativasRealizadas
+                            + " realizadas ");
+
+    }
+
+    // método auxiliar
+    static boolean atender() {
+        return new Random().nextInt(3) == 1;
+    }
+
+    static void imprimirSelecionados() {
+        String[] candidatos = { "EDUARDO", "MARTINEZ", "RYAN", "MATHEUS", "FELIX" };
+
+        System.out.println("Imprimindo a lista de candidatos informando o indice do elemento");
+
+        for (int indice = 0; indice < candidatos.length; indice++) {
+            System.out.println("O candidato de nº " + (indice + 1) + " é o " + candidatos[indice]);
+        }
+        System.out.println("Forma abreviada de interação for each");
+
+        for (String candidato : candidatos) {
+            System.out.println("Candidato selecionado foi " + candidato);
+        }
     }
 
     static void selecaoCandidatos() {
         // Criei um array de candidatos para ser avaliados durante o processo seletivo
-        String[] candidatos = { "EDUARDO", "MARTINEZ", "RYAN", "MATHEUS F", "FELIX T", "IGOR C", "YURI A", "DEPAY",
-                "GARRO", "MATHEUS B" };
+        String[] candidatos = { "EDUARDO", "MARTINEZ", "RYAN", "MATHEUS", "FELIX", "IGOR", "YURI", "DEPAY",
+                "GARRO", "MATHEUS" };
 
         int candidatosSelecionados = 0; // Quantos candidatos foram selecionados.
         int candidatoAtual = 0; // Quem é o candidato atual
